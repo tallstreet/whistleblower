@@ -19,7 +19,7 @@ var render = function(backend, timer) {
     <Application
       backend={backend}
       timer={timer} />,
-    document.getElementById('app')
+    document.getElementById("app")
   );
 };
 

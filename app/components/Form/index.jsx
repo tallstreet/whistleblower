@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 import { post } from "../../actions/FormCreators";
 
 /*
   Component specific stylesheet
   Can also use .less, .scss, or plain .css files here
 */
-require('./style.scss');
+require("./style.scss");
 
 
 export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        data: '',
-        account: '',
+        data: "",
+        account: "",
         amount: 0,
     };
   }

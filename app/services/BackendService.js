@@ -24,11 +24,11 @@ function handlePost(evt) {
     loading: { $set: true },
   }));
 
-  fetch('http://localhost:5000/api/v1/add', {
-    method: 'post',
+  fetch("http://localhost:5000/api/v1/add", {
+    method: "post",
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      "Accept": "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(evt.value),
   }).then((resp) => {

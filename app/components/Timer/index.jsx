@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 /*
   Component specific stylesheet
   Can also use .less, .scss, or plain .css files here
 */
-require('./style.scss');
+require("./style.scss");
 
 
 export default class Timer extends React.Component {

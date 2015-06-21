@@ -1,13 +1,13 @@
-import React from 'react';
-import Header from '../Header';
-import Form from '../Form';
-import Timer from '../Timer';
+import React from "react";
+import Header from "../Header";
+import Form from "../Form";
+import Timer from "../Timer";
 
 /*
   Component specific stylesheet
   Can also use .less, .scss, or plain .css files here
 */
-require('./style.scss');
+require("./style.scss");
 
 export default class Application extends React.Component {
   render() {

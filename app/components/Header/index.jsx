@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 /*
   Component specific stylesheet
   Can also use .less, .scss, or plain .css files here
 */
-require('./style.scss');
+require("./style.scss");
 
 /*
   Reference an image and get back a URL automatically via webpack.
   webpack takes care of versioning, bundling for production, etc.
 */
-const logoURL = require('./images/react-logo.svg');
+const logoURL = require("./images/react-logo.svg");
 
 export default class Header extends React.Component {
   render() {

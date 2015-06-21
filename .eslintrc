@@ -20,7 +20,6 @@
   "rules": {
     "strict": 0,
     "comma-dangle": [2, "always-multiline"],
-    "quotes": "single",
     "no-underscore-dangle": 0,
   },
   "globals": {

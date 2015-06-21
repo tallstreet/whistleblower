@@ -12,7 +12,7 @@ const TIMEOUT = 60;
 var timerStore = new BehaviorSubject({
   timeLeft: TIMEOUT,
   started: false,
-  account: '',
+  account: "",
   amount: 0,
   result: false,
 });
