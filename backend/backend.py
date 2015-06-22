@@ -49,8 +49,8 @@ access_token=""
 access_token_secret=""
 
 nxt_base = "http://4c4b2841.ngrok.com/nxt"
-nxt_secret = 'card double stock puff few strange important green quick weight breast about'
-nxt_account = 'NXT-TFRX-DAA9-4TVS-5JGWH'
+nxt_secret = 'eeedt'
+nxt_account = 'NXT-xxxxx'
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.secure = True
