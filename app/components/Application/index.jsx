@@ -2,6 +2,9 @@ import React from 'react';
 import Header from '../Header';
 import Form from '../Form';
 import Timer from '../Timer';
+import { bindActionCreators } from 'redux';
+import { connect } from 'redux/react';
+import * as FormActions from '../../actions/FormActions';
 
 const bgURL = require('./images/bg.jpg');
 const styles = {
@@ -26,13 +29,20 @@ const styles = {
     boxShadow: '0 0 20px rgba(0, 0, 0, 0.25)',
   },
 };
+
+@connect(state => ({
+  timer: state.timer,
+  backend: state.backend,
+}))
 export default class Application extends React.Component {
   render() {
+    const { timer, backend, dispatch } = this.props;
+    const actions = bindActionCreators(FormActions, dispatch);
     let part;
-    if (this.props.timer.started) {
-      part = <Timer timer={this.props.timer} backend={this.props.backend}/>;
+    if (timer.started) {
+      part = <Timer timer={timer} backend={backend}/>;
     } else {
-      part = <Form />;
+      part = <Form post={actions.post}/>;
     }
     return (
       <div style={styles.applicationComponent}>
@@ -45,9 +55,3 @@ export default class Application extends React.Component {
     );
   }
 }
-
-
-Application.propTypes = {
-  backend: React.PropTypes.object,
-  timer: React.PropTypes.object,
-};

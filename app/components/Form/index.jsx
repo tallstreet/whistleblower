@@ -1,7 +1,10 @@
-import React from 'react';
-import { post } from '../../actions/FormCreators';
+import React, { PropTypes } from 'react';
 
 export default class Form extends React.Component {
+  static propTypes = {
+    post: PropTypes.func.isRequired,
+  };
+
   render() {
     return (
       <form>
@@ -34,9 +37,9 @@ export default class Form extends React.Component {
     this.setState({amount: evt.target.value});
   }
 
-  _post() {
-    post(this.state.data, this.state.amount, this.state.account);
-    return false;
+  _post(e) {
+    this.props.post(this.state.data, this.state.amount, this.state.account);
+    e.preventDefault();
   }
 
   constructor(props) {
