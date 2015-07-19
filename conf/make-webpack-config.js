@@ -26,7 +26,7 @@ module.exports = function(options) {
     '&includePaths[]=' + path.resolve(__dirname, '../app/styles')
     ;
 
-  var jsLoaders = ['babel'];
+  var jsLoaders = ['babel?stage=0'];
 
   return {
     entry: options.entry,
