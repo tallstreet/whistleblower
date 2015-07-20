@@ -4,7 +4,7 @@ import Form from '../Form';
 import Timer from '../Timer';
 import { bindActionCreators } from 'redux';
 import { connect } from 'redux/react';
-import * as FormActions from '../../actions/FormActions';
+import * as BackendActions from '../../actions/BackendActions';
 
 const bgURL = require('./images/bg.jpg');
 const styles = {
@@ -37,7 +37,7 @@ const styles = {
 export default class Application extends React.Component {
   render() {
     const { timer, backend, dispatch } = this.props;
-    const actions = bindActionCreators(FormActions, dispatch);
+    const actions = bindActionCreators(BackendActions, dispatch);
     let part;
     if (timer.started) {
       part = <Timer timer={timer} backend={backend}/>;

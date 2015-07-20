@@ -1,4 +1,4 @@
-import application from './Application.jsx';
+import application from './App.jsx';
 
 export {
   application
