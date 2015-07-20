@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Header from '../Header';
 import Form from '../Form';
 import Timer from '../Timer';
@@ -35,6 +35,12 @@ const styles = {
   backend: state.backend,
 }))
 export default class Application extends React.Component {
+  static propTypes = {
+    timer: PropTypes.object.isRequired,
+    backend: PropTypes.object.isRequired,
+    dispatch: PropTypes.object.isRequired,
+  };
+
   render() {
     const { timer, backend, dispatch } = this.props;
     const actions = bindActionCreators(BackendActions, dispatch);
