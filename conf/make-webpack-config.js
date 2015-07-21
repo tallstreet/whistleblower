@@ -12,7 +12,7 @@ function extractForProduction(loaders) {
 module.exports = function(options) {
   options.lint = fs.existsSync(path.join(__dirname, '..', '.eslintrc')) && options.lint !== false;
 
-  var cssLoaders = 'style!css!autoprefixer?browsers=last 2 versions';
+  var cssLoaders = 'style!css!cssnext!autoprefixer?browsers=last 2 versions';
   var scssLoaders = cssLoaders + '!sass';
   var sassLoaders = scssLoaders + '?indentedSyntax=sass';
 
@@ -34,8 +34,11 @@ module.exports = function(options) {
     devtool: options.devtool,
     output: {
       path: options.production ? './dist' : './build',
-      publicPath: options.production ? '' : 'http://localhost:8080/',
+      publicPath: options.production ? '' : 'http://0.0.0.0:8080/',
       filename: options.production ? 'app.[hash].js' : 'app.js',
+    },
+    cssnext: {
+      browsers: "last 2 versions",
     },
     module: {
       noParse: [
@@ -50,12 +53,7 @@ module.exports = function(options) {
       ] : [],
       loaders: [
         {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loaders: jsLoaders,
-        },
-        {
-          test: /\.jsx$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           loaders: options.production ? jsLoaders : ['react-hot'].concat(jsLoaders),
         },
@@ -121,6 +119,7 @@ module.exports = function(options) {
         production: true,
       }),
     ] : [
+      new webpack.NoErrorsPlugin(),
       new HtmlWebpackPlugin({
         template: './conf/tmpl.html',
       }),
