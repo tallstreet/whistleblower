@@ -1,9 +1,16 @@
 import { TIMER_TICK } from '../constants/ActionTypes';
 
-export default function backend(state = 60, action) {
+const initialState = {
+  timeLeft: 60
+};
+
+export default function backend(state = initialState, action) {
   switch (action.type) {
   case TIMER_TICK:
-    return state - 1;
+    return {
+      ...state,
+      timeLeft: state.timeLeft - 1
+    };
   default:
     return state;
   }

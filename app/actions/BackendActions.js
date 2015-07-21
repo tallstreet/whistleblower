@@ -1,4 +1,11 @@
-import { POST_REQUEST, POST_SUCCESS, POST_FAILURE, CHECK_REQUEST, CHECK_SUCCESS, CHECK_FAILURE } from '../constants/ActionTypes';
+import {
+  POST_REQUEST,
+  POST_SUCCESS,
+  POST_FAILURE,
+  CHECK_REQUEST,
+  CHECK_SUCCESS,
+  CHECK_FAILURE
+} from '../constants/ActionTypes';
 import { api } from '../utils/webapi';
 
 export function post(data, amount, account) {

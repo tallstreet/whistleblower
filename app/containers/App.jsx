@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Application from '../components/Application';
-import { Provider } from 'redux/react';
+import { Provider } from 'react-redux';
 import { createRedux, createDispatcher, composeStores } from 'redux';
 import promiseMiddleware from '../middleware/promise';
 import observableMiddleware from '../middleware/observable';

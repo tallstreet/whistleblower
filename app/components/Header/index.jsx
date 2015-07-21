@@ -26,11 +26,13 @@ const styles = {
   },
 };
 
-/*
-  Reference an image and get back a URL automatically via webpack.
-  webpack takes care of versioning, bundling for production, etc.
-*/
-const logoURL = require('./images/react-logo.svg');
+if (__CLIENT__) {
+  /*
+    Reference an image and get back a URL automatically via webpack.
+    webpack takes care of versioning, bundling for production, etc.
+  */
+  const logoURL = require('./images/react-logo.svg');
+}
 
 @Radium
 export default class Header extends React.Component {

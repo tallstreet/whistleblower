@@ -26,7 +26,7 @@ module.exports = function(options) {
     '&includePaths[]=' + path.resolve(__dirname, '../app/styles')
     ;
 
-  var jsLoaders = ['babel?stage=0'];
+  var jsLoaders = ['babel'];
 
   return {
     entry: options.entry,
@@ -35,10 +35,11 @@ module.exports = function(options) {
     output: {
       path: options.production ? './dist' : './build',
       publicPath: options.production ? '' : 'http://0.0.0.0:8080/',
-      filename: options.production ? 'app.[hash].js' : 'app.js',
+      filename: options.production ? '[name].[hash].js' : '[name].js',
+      chunkFilename: options.production ? '[name]-[chunkhash].js' : '[name]-[chunkhash].js'
     },
     cssnext: {
-      browsers: "last 2 versions",
+      browsers: 'last 2 versions'
     },
     module: {
       noParse: [
@@ -93,11 +94,19 @@ module.exports = function(options) {
     plugins: options.production ? [
       // Important to keep React file size down
       new webpack.DefinePlugin({
-        "process.env": {
-          "NODE_ENV": JSON.stringify("production"),
-        },
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production'),
+          // Mainly used to require CSS files with webpack, which can happen only on browser
+          // Used as `if (process.env.BROWSER)...`
+          'BROWSER': JSON.stringify(true)
+        }
       }),
-      function() {
+      new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false, __DEVELOPMENT__: false, __DEVTOOLS__: false}),
+
+      // ignore dev config
+      new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
+
+      function stats() {
         this.plugin('done', function(stats) {
           fs.writeFileSync('./manifest.json', JSON.stringify(stats.toJson().assetsByChunkName));
         });
@@ -110,20 +119,27 @@ module.exports = function(options) {
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: false,
-        },
+          warnings: false
+        }
       }),
-      new ExtractTextPlugin("app.[hash].css"),
-      new HtmlWebpackPlugin({
-        template: './conf/tmpl.html',
-        production: true,
-      }),
+      new ExtractTextPlugin("app.[hash].css")
     ] : [
+      new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
-      new HtmlWebpackPlugin({
-        template: './conf/tmpl.html',
+      new webpack.DefinePlugin({
+        __CLIENT__: true,
+        __SERVER__: false,
+        __DEVELOPMENT__: true,
+        __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
       }),
-      new RewirePlugin(),
-    ],
+      // stats
+      function notifyStats() {
+        this.plugin('done', notifyStats);
+      },
+      function writeStats() {
+        this.plugin('done', writeStats);
+      },
+      new RewirePlugin()
+    ]
   };
 };
