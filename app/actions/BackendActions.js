@@ -17,20 +17,20 @@ export function post(data, amount, account) {
       method: 'post',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         data,
         amount,
-        account,
-      }),
-    }),
+        account
+      })
+    })
   };
 }
 
 export function check(account) {
   return {
     types: [CHECK_REQUEST, CHECK_SUCCESS, CHECK_FAILURE],
-    promise: api(`http://4c4b2841.ngrok.com/nxt?requestType=getBalance&account=${account}`),
+    promise: api(`http://4c4b2841.ngrok.com/nxt?requestType=getBalance&account=${account}`)
   };
 }

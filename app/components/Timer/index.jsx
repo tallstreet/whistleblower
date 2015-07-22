@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 export default class Timer extends React.Component {
   static propTypes = {
     timer: PropTypes.object.isRequired,
-    backend: PropTypes.object.isRequired,
+    backend: PropTypes.object.isRequired
   };
 
   render() {

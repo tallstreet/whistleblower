@@ -11,5 +11,5 @@ export default keyMirror({
 
   TIMER_TICK: null,
   TIMER_ERROR: null,
-  TIMER_COMPLETE: null,
+  TIMER_COMPLETE: null
 });

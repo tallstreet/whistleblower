@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 export default class Form extends React.Component {
   static propTypes = {
-    post: PropTypes.func.isRequired,
+    post: PropTypes.func.isRequired
   };
 
   render() {
@@ -47,7 +47,7 @@ export default class Form extends React.Component {
     this.state = {
       data: '',
       account: '',
-      amount: 0,
+      amount: 0
     };
   }
 }

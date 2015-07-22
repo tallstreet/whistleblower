@@ -130,7 +130,7 @@ module.exports = function(options) {
         template: './conf/tmpl.html',
       }),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
+      //new webpack.NoErrorsPlugin(),
       new webpack.DefinePlugin({
         __CLIENT__: true,
         __SERVER__: false,

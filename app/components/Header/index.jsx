@@ -6,24 +6,24 @@ const styles = {
     display: 'flex',
     paddingBottom: '1em',
     borderBottom: '1px solid #eee',
-    marginBottom: '1em',
+    marginBottom: '1em'
   },
 
   headerComponentLogo: {
-    marginRight: '20px',
+    marginRight: '20px'
   },
 
   headerComponentWrap: {
     display: 'flex',
     flexFlow: 'column',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   headerComponentTitle: {
     marginBottom: '0.5em',
     fontWeight: 'bold',
-    fontSize: '2em',
-  },
+    fontSize: '2em'
+  }
 };
 
 let logoURL = '';
