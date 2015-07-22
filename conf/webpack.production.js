@@ -1,7 +1,7 @@
 module.exports = require('./make-webpack-config')({
   production: true,
   entry: {
-    app: './app/index.js',
+    app: './app/client.js',
     vendor: [
       "rx",
       "react",
