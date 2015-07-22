@@ -1,4 +1,9 @@
 /* global __DEVTOOLS__ */
+
+// IMPORTANT: This needs to be first (before any other components)
+// to get around CSS order randomness in webpack.
+require('./index.scss');
+
 import React from 'react';
 import BrowserHistory from 'react-router/lib/BrowserHistory';
 import Location from 'react-router/lib/Location';

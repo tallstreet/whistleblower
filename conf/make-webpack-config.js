@@ -71,6 +71,10 @@ module.exports = function(options) {
           loader: scssLoaders,
         },
         {
+          test: /\.json$/,
+          loader: "json",
+        },
+        {
           test: /\.png$/,
           loader: "url?limit=100000&mimetype=image/png",
         },
@@ -130,7 +134,7 @@ module.exports = function(options) {
         template: './conf/tmpl.html',
       }),
       new webpack.HotModuleReplacementPlugin(),
-      //new webpack.NoErrorsPlugin(),
+      new webpack.NoErrorsPlugin(),
       new webpack.DefinePlugin({
         __CLIENT__: true,
         __SERVER__: false,

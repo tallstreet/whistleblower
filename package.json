@@ -58,6 +58,7 @@
     "inuit-widths": "^0.4.2",
     "isparta": "^3.0.3",
     "isparta-instrumenter-loader": "^0.2.1",
+    "json-loader": "^0.5.2",
     "karma": "^0.12.32",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^0.4.2",
