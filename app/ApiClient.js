@@ -1,5 +1,5 @@
 /*global __SERVER__*/
-import superagent from 'superagent';
+import fetch from 'node-fetch';
 import config from './config';
 
 class ApiClient {
@@ -8,7 +8,7 @@ class ApiClient {
       forEach((method) => {
         this[method] = (path, options) => {
           return new Promise((resolve, reject) => {
-            let request = superagent[method](this.formatUrl(path));
+            let request = fetch[method](this.formatUrl(path));
             if (options && options.params) {
               request.query(options.params);
             }

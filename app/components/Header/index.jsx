@@ -26,12 +26,13 @@ const styles = {
   },
 };
 
+let logoURL = '';
 if (__CLIENT__) {
   /*
     Reference an image and get back a URL automatically via webpack.
     webpack takes care of versioning, bundling for production, etc.
   */
-  const logoURL = require('./images/react-logo.svg');
+  logoURL = require('./images/react-logo.svg');
 }
 
 @Radium

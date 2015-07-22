@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Application from '../components/Application';
 import { Provider } from 'react-redux';
 import { createRedux, createDispatcher, composeStores } from 'redux';
-import promiseMiddleware from '../middleware/promise';
-import observableMiddleware from '../middleware/observable';
+import promiseMiddleware from '../redux/promise';
+import observableMiddleware from '../redux/observable';
 import * as stores from '../stores/index';
 
 // Compose all your Stores into a single Store function with `composeStores`:

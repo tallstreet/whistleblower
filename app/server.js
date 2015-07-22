@@ -21,10 +21,10 @@ app.use(compression());
 let webpackStats;
 
 if (!__DEVELOPMENT__) {
-  webpackStats = require('../manifest.json');
+  webpackStats = require('../webpack-stats.json');
 }
 
-app.use(require('serve-static')(path.join(__dirname, '..', 'static')));
+app.use(require('serve-static')(path.join(__dirname, '..', 'build')));
 
 // Proxy to API server
 app.use('/api', (req, res) => {

@@ -102,18 +102,16 @@ module.exports = function(options) {
         }
       }),
       new webpack.DefinePlugin({__CLIENT__: true, __SERVER__: false, __DEVELOPMENT__: false, __DEVTOOLS__: false}),
-
       // ignore dev config
       new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
-
       function stats() {
-        this.plugin('done', function(stats) {
+        this.plugin('done', function writeStats(stats) {
           fs.writeFileSync('./manifest.json', JSON.stringify(stats.toJson().assetsByChunkName));
         });
       },
       new webpack.optimize.CommonsChunkPlugin({
         name: "vendor",
-        filename: "[name].[chunkhash].js",
+        filename: "[name].[hash].js",
       }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
@@ -122,8 +120,15 @@ module.exports = function(options) {
           warnings: false
         }
       }),
-      new ExtractTextPlugin("app.[hash].css")
+      new ExtractTextPlugin("app.[hash].css"),
+      new HtmlWebpackPlugin({
+        template: './conf/tmpl.html',
+        production: true,
+      })
     ] : [
+      new HtmlWebpackPlugin({
+        template: './conf/tmpl.html',
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin(),
       new webpack.DefinePlugin({
@@ -132,13 +137,6 @@ module.exports = function(options) {
         __DEVELOPMENT__: true,
         __DEVTOOLS__: true  // <-------- DISABLE redux-devtools HERE
       }),
-      // stats
-      function notifyStats() {
-        this.plugin('done', notifyStats);
-      },
-      function writeStats() {
-        this.plugin('done', writeStats);
-      },
       new RewirePlugin()
     ]
   };
