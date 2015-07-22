@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as BackendActions from '../../actions/BackendActions';
 
-export default class Form extends React.Component {
+class Form extends React.Component {
   static propTypes = {
     post: PropTypes.func.isRequired
   };
@@ -49,5 +52,36 @@ export default class Form extends React.Component {
       account: '',
       amount: 0
     };
+  }
+}
+
+
+@connect(state => ({
+  error: state.backend.error,
+  post: state.backend.post,
+  loading: state.backend.loading
+}))
+export default class FormContainer {
+  static propTypes = {
+    error: PropTypes.string,
+    loading: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired
+  }
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { router } = this.context;
+    if (nextProps.post) {
+      router.transitionTo('/countdown');
+    }
+  }
+
+  render() {
+    const { error, loading, dispatch } = this.props;
+    return <Form error={error}
+                    loading={loading} {...bindActionCreators(BackendActions, dispatch)} >{this.props.children}</Form>;
   }
 }

@@ -8,7 +8,7 @@ import compression from 'compression';
 import httpProxy from 'http-proxy';
 import path from 'path';
 import createStore from './redux/create';
-import ApiClient from './ApiClient';
+import ApiClient from './ServerApiClient';
 import universalRouter from './universalRouter';
 const app = new Express();
 const proxy = httpProxy.createProxyServer({

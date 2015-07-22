@@ -8,6 +8,6 @@ export function startTimer(account, amount) {
     account,
     amount,
     types: [TIMER_TICK, TIMER_ERROR, TIMER_COMPLETE],
-    observable: Observable.timer(1000, 1000).take(TIMEOUT),
+    observable: Observable.timer(1000, 1000).take(TIMEOUT)
   };
 }

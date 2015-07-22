@@ -6,18 +6,22 @@ import * as reducers from '../stores/index';
 const reducer = combineReducers(reducers);
 
 export default function(client, data) {
-  const middleware = promise(observable(client));
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {
     const { devTools, persistState } = require('redux-devtools');
     finalCreateStore = compose(
-      applyMiddleware(middleware),
+      applyMiddleware(promise(client)),
+      applyMiddleware(observable),
       devTools(),
       persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)),
       createStore
     );
   } else {
-    finalCreateStore = applyMiddleware(middleware)(createStore);
+    finalCreateStore = compose(
+      applyMiddleware(promise(client)),
+      applyMiddleware(observable),
+      createStore
+    );
   }
   return finalCreateStore(reducer, data);
 }

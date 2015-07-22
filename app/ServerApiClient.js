@@ -1,8 +1,9 @@
-import 'whatwg-fetch';
-import 'es6-promise';
+/*global __SERVER__*/
+import fetch from 'node-fetch';
 
 class ApiClient {
-  constructor() {
+  constructor(req) {
+    this.req = req;
   }
 
   fetch(url, options) {

@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import Header from '../Header';
-import Form from '../Form';
-import Timer from '../Timer';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as BackendActions from '../../actions/BackendActions';
+
+import {createTransitionHook} from '../../universalRouter';
 
 
 let bgURL = '';
@@ -35,47 +32,26 @@ const styles = {
   }
 };
 
-class Application extends React.Component {
-  static propTypes = {
-    timer: PropTypes.object.isRequired,
-    backend: PropTypes.object.isRequired,
-    post: PropTypes.func.isRequired
-  };
+export default class Application extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired
+  }
+
+  componentWillMount() {
+    const {router, store} = this.context;
+    router.addTransitionHook(createTransitionHook(store));
+  }
 
   render() {
-    const { timer, backend, post } = this.props;
-    let part;
-    if (timer.started) {
-      part = <Timer timer={timer} backend={backend}/>;
-    } else {
-      part = <Form post={post}/>;
-    }
     return (
       <div style={styles.applicationComponent}>
         <div style={styles.applicationComponentWrap}>
           <Header />
 
-          {part}
+          {this.props.children}
         </div>
       </div>
     );
-  }
-}
-
-
-@connect(state => ({
-  timer: state.timer,
-  backend: state.backend
-}))
-export default class ApplicationContainer {
-  static propTypes = {
-    timer: PropTypes.object,
-    backend: PropTypes.object,
-    dispatch: PropTypes.func.isRequired
-  }
-
-  render() {
-    const { timer, backend, dispatch } = this.props;
-    return <Application timer={timer} backend={backend} {...bindActionCreators(BackendActions, dispatch)}/>;
   }
 }
