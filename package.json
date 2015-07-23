@@ -13,7 +13,7 @@
     "start-prod-backend": "NODE_PATH=\"./app\" NODE_ENV=\"production\" PORT=\"8080\" node ./babel.server",
     "build": "node ./node_modules/webpack/bin/webpack.js --verbose --colors --display-error-details --config conf/webpack.production.js",
     "build:gh": "npm run build && node ./build-gh-pages.js && rm -r ./dist",
-    "start": "./node_modules/.bin/webpack-dev-server --config conf/webpack.config.js --hot --progress --colors --inline --content-base ./build",
+    "start": "./node_modules/.bin/webpack-dev-server --config conf/webpack.config.js --hot --history-api-fallback --progress --colors --inline --content-base ./build",
     "dev": "node ./node_modules/concurrently/src/main.js --kill-others \"npm run start\" \"npm run start-dev-backend\""
   },
   "author": "Gary Roberts <contact@tallstreet.com>",
