@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import {isLoaded as isTimerLoaded} from '../../stores/timer';
+import {startTimer} from '../../actions/TimerActions';
+
 
 class Timer extends React.Component {
   static propTypes = {
@@ -41,6 +44,15 @@ export default class TimerContainer {
     key: PropTypes.string.isRequired,
     transaction: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired
+  }
+
+  static fetchData(store) {
+    const promises = [];
+    if (!isTimerLoaded(store.getState())) {
+      store.dispatch(startTimer());
+      promises.push(true);
+    }
+    return Promise.all(promises);
   }
 
   componentWillReceiveProps(nextProps) {

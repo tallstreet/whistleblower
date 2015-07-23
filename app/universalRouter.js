@@ -3,12 +3,16 @@ import Router from 'react-router';
 import routes from './routes';
 import { Provider } from 'react-redux';
 
+/*
 const getFetchData = (component) => {
   return component.fetchData || (component.DecoratedComponent && component.DecoratedComponent.fetchData);
 };
+*/
 
-export function createTransitionHook(store) {
+export function createTransitionHook() {
   return (nextState, transition, callback) => {
+    callback();
+    /*
     Promise.all(nextState.branch
       .map(route => route.component)
       .filter(component => {
@@ -23,6 +27,7 @@ export function createTransitionHook(store) {
       }, (error) => {
         callback(error);
       });
+      */
   };
 }
 

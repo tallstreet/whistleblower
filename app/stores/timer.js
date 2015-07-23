@@ -1,7 +1,8 @@
 import { TIMER_TICK } from '../constants/ActionTypes';
 
 const initialState = {
-  timeLeft: 60
+  timeLeft: 60,
+  started: false
 };
 
 export default function backend(state = initialState, action) {
@@ -9,9 +10,14 @@ export default function backend(state = initialState, action) {
   case TIMER_TICK:
     return {
       ...state,
+      started: true,
       timeLeft: state.timeLeft - 1
     };
   default:
     return state;
   }
+}
+
+export function isLoaded(globalState) {
+  return globalState.timer && globalState.timer.started;
 }
