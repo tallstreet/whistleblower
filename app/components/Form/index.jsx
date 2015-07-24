@@ -41,7 +41,7 @@ class Form extends React.Component {
   }
 
   _post(e) {
-    this.props.post(this.state.data, this.state.amount, this.state.account);
+    this.props.post(this.state.data, parseInt(this.state.amount, 10), this.state.account);
     e.preventDefault();
   }
 

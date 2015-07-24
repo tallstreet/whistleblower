@@ -10,7 +10,7 @@ class Timer extends React.Component {
     amount: PropTypes.number.isRequired,
     account: PropTypes.number.isRequired,
     crypted: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    keyName: PropTypes.string.isRequired,
     transaction: PropTypes.string.isRequired
   };
 
@@ -19,7 +19,7 @@ class Timer extends React.Component {
       <div>
           <p>Encrypted Data:<br/> <textarea className="form-control" value={this.props.crypted}></textarea></p>
           <p>This has been published on the <a href={`http://4c4b2841.ngrok.com/nxt?requestType=readMessage&transaction=${this.props.transaction}`} target="_blank">NXT Blockchain</a></p>
-          <p>Key: {this.props.key}</p>
+          <p>Key: {this.props.keyName}</p>
           <p>Releasing information in {this.props.timeLeft} unless {this.props.amount} is paid into {this.props.account}</p>
       </div>
     );
@@ -32,16 +32,16 @@ class Timer extends React.Component {
   amount: state.backend.amount,
   account: state.backend.account,
   crypted: state.backend.crypted,
-  key: state.backend.account,
-  transaction: state.backend.account
+  keyName: state.backend.keyName,
+  transaction: state.backend.transaction
 }))
 export default class TimerContainer {
   static propTypes = {
     timeLeft: PropTypes.number.isRequired,
     amount: PropTypes.number.isRequired,
-    account: PropTypes.number.isRequired,
+    account: PropTypes.string.isRequired,
     crypted: PropTypes.string.isRequired,
-    key: PropTypes.string.isRequired,
+    keyName: PropTypes.string.isRequired,
     transaction: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired
   }
@@ -53,19 +53,19 @@ export default class TimerContainer {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.timeLeft <= 0) {
-      dispatch(check);
+    if (nextProps.timeLeft <= 0 && nextProps.timeLeft !== this.props.timeLeft) {
+      this.props.dispatch(check);
     }
   }
 
   render() {
-    const { timeLeft, amount, account, crypted, key, transaction } = this.props;
+    const { timeLeft, amount, account, crypted, keyName, transaction } = this.props;
     return <Timer
                 timeLeft={timeLeft}
                 amount={amount}
                 account={account}
                 crypted={crypted}
-                key={key}
-                transaction={transaction}>{this.props.children}</Timer>;
+                keyName={keyName}
+                transaction={transaction} >{this.props.children}</Timer>;
   }
 }
