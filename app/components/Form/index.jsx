@@ -74,7 +74,7 @@ export default class FormContainer {
 
   componentWillReceiveProps(nextProps) {
     const { router } = this.context;
-    if (nextProps.post) {
+    if (nextProps.post && this.props.post !== nextProps.post) {
       router.transitionTo('/countdown');
     }
   }

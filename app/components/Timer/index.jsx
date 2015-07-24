@@ -47,12 +47,9 @@ export default class TimerContainer {
   }
 
   static fetchData(store) {
-    const promises = [];
     if (!isTimerLoaded(store.getState())) {
-      store.dispatch(startTimer());
-      promises.push(true);
+      return store.dispatch(startTimer());
     }
-    return Promise.all(promises);
   }
 
   componentWillReceiveProps(nextProps) {
